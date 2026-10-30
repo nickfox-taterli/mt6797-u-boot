@@ -156,6 +156,7 @@ struct ssusb_mtk {
 	struct udevice *vbus_supply;
 	struct clk_bulk clks;
 	struct phy_bulk phys;
+	bool is_mt6797;
 };
 
 /**

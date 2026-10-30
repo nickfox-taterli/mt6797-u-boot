@@ -88,6 +88,9 @@ static int mtu3_device_enable(struct mtu3 *mtu)
 	void __iomem *ibase = mtu->ippc_base;
 	u32 check_clk = 0;
 
+	if (mtu->ssusb->is_mt6797)
+		mtu3_clrbits(ibase, U3D_SSUSB_IP_PW_CTRL0, SSUSB_IP_SW_RST);
+
 	mtu3_clrbits(ibase, U3D_SSUSB_IP_PW_CTRL2, SSUSB_IP_DEV_PDN);
 
 	if (mtu->is_u3_ip) {
@@ -99,6 +102,8 @@ static int mtu3_device_enable(struct mtu3 *mtu)
 	mtu3_clrbits(ibase, SSUSB_U2_CTRL(0),
 		     (SSUSB_U2_PORT_DIS | SSUSB_U2_PORT_PDN |
 		      SSUSB_U2_PORT_HOST_SEL));
+	if (mtu->ssusb->is_mt6797)
+		mtu3_setbits(ibase, U3D_SSUSB_REF_CK_CTRL, 0xf);
 
 	return ssusb_check_clocks(mtu->ssusb, check_clk);
 }
@@ -125,6 +130,21 @@ static void mtu3_device_reset(struct mtu3 *mtu)
 	mtu3_setbits(ibase, U3D_SSUSB_DEV_RST_CTRL, SSUSB_DEV_SW_RST);
 	udelay(1);
 	mtu3_clrbits(ibase, U3D_SSUSB_DEV_RST_CTRL, SSUSB_DEV_SW_RST);
+}
+
+static int mt6797_device_reset(struct mtu3 *mtu)
+{
+	u32 value;
+	int ret;
+
+	mtu3_writel(mtu->ippc_base, U3D_SSUSB_DEV_RST_CTRL, SSUSB_DEV_SW_RST);
+	mtu3_writel(mtu->ippc_base, U3D_SSUSB_DEV_RST_CTRL, 0);
+	ret = ssusb_check_clocks(mtu->ssusb, 0);
+	if (ret)
+		return ret;
+	/* This generation needs QMU, BMU and device-reset completion as well. */
+	return readl_poll_timeout(mtu->ippc_base + U3D_SSUSB_IP_PW_STS1,
+				  value, (value & 0xe) == 0xe, 10000);
 }
 
 static void mtu3_intr_status_clear(struct mtu3 *mtu)
@@ -673,6 +693,12 @@ static irqreturn_t mtu3_link_isr(struct mtu3 *mtu)
 	mtu->g.speed = udev_speed;
 	mtu->g.ep0->maxpacket = maxpkt;
 	mtu->ep0_state = MU3D_EP0_STATE_SETUP;
+	if (mtu->ssusb->is_mt6797 && (udev_speed == USB_SPEED_FULL ||
+				     udev_speed == USB_SPEED_HIGH)) {
+		mtu3_writel(mbase, U3D_USB20_LPM_PARAMETER, 0x10f0);
+		if (mtu->is_u3_ip)
+			mtu3_setbits(mtu->ippc_base, SSUSB_U3_CTRL(0), SSUSB_U3_PORT_PDN);
+	}
 
 	if (udev_speed == USB_SPEED_UNKNOWN)
 		mtu3_gadget_disconnect(mtu);
@@ -728,8 +754,22 @@ static irqreturn_t mtu3_u2_common_isr(struct mtu3 *mtu)
 	if (u2comm & RESUME_INTR)
 		mtu3_gadget_resume(mtu);
 
-	if (u2comm & RESET_INTR)
+	if (u2comm & RESET_INTR) {
+		if (mtu->ssusb->is_mt6797) {
+			u32 status;
+
+			mtu3_clrbits(mtu->ippc_base, U3D_SSUSB_IP_PW_CTRL2,
+				     SSUSB_IP_DEV_PDN);
+			mtu3_clrbits(mtu->ippc_base, SSUSB_U2_CTRL(0), SSUSB_U2_PORT_PDN);
+			if (mtu->is_u3_ip)
+				mtu3_clrbits(mtu->ippc_base, SSUSB_U3_CTRL(0), SSUSB_U3_PORT_PDN);
+			readl_poll_timeout(mtu->ippc_base + U3D_SSUSB_IP_PW_STS1,
+					   status, status & SSUSB_SYSPLL_STABLE, 10000);
+		}
 		mtu3_gadget_reset(mtu);
+		if (mtu->ssusb->is_mt6797)
+			mtu3_ep0_setup(mtu);
+	}
 
 	return IRQ_HANDLED;
 }
@@ -746,7 +786,7 @@ irqreturn_t mtu3_irq(int irq, void *data)
 	level1 = mtu3_readl(mtu->mac_base, U3D_LV1ISR);
 	level1 &= mtu3_readl(mtu->mac_base, U3D_LV1IER);
 
-	if (level1 & EP_CTRL_INTR)
+	if ((level1 & EP_CTRL_INTR) && !mtu->ssusb->is_mt6797)
 		mtu3_link_isr(mtu);
 
 	if (level1 & MAC2_INTR)
@@ -760,6 +800,8 @@ irqreturn_t mtu3_irq(int irq, void *data)
 
 	if (level1 & QMU_INTR)
 		mtu3_qmu_isr(mtu);
+	if ((level1 & EP_CTRL_INTR) && mtu->ssusb->is_mt6797)
+		mtu3_link_isr(mtu);
 
 	spin_unlock_irqrestore(&mtu->lock, flags);
 
@@ -809,12 +851,18 @@ static int mtu3_hw_init(struct mtu3 *mtu)
 
 	mtu3_check_params(mtu);
 
-	mtu3_device_reset(mtu);
+	if (!mtu->ssusb->is_mt6797)
+		mtu3_device_reset(mtu);
 
 	ret = mtu3_device_enable(mtu);
 	if (ret) {
 		dev_err(mtu->dev, "device enable failed %d\n", ret);
 		return ret;
+	}
+	if (mtu->ssusb->is_mt6797) {
+		ret = mt6797_device_reset(mtu);
+		if (ret)
+			return ret;
 	}
 
 	ret = mtu3_mem_alloc(mtu);

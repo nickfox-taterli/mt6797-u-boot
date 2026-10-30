@@ -15,7 +15,6 @@
 #include "mmc_core.h"
 #include "msdc.h"
 #include "tz_mem.h"
-#include "tz_emi_mpu.h"
 
 u32 g_ddr_reserve_enable;
 u32 g_ddr_reserve_success;
@@ -110,5 +109,5 @@ void x20_hw_trustzone_init(void)
     tz_dapc_sec_init();
     tz_dapc_sec_postinit();
     tz_sram_sec_init(0x12a000);
-    tz_emi_mpu_init(0x44600000, 0x4460ffff, ATF_MPU_REGION_ID);
+    /* BL31 lives in SRAM; no secure DRAM window is needed at 0x44600000. */
 }

@@ -2,32 +2,30 @@
 /dts-v1/;
 
 / {
-	model = "MediaTek X20-96";
+	model = "MediaTek X20 Development Board";
 	compatible = "archermind,x20-96", "mediatek,mt6797";
 	#address-cells = <2>;
 	#size-cells = <2>;
 	aliases {
 		serial0 = &uart0;
 		mmc0 = &mmc0;
+		mmc1 = &mmc1;
 	};
 	chosen {
 		stdout-path = "serial0:921600n8";
 	};
 	memory@40000000 {
 		device_type = "memory";
-		/* Preserve the Preloader's top-of-DRAM reservation. */
-		reg = <0 0x40000000 0 0x7ffa0000>;
+		/* SPL has no legacy Preloader/ATF-log buffers at the DRAM top. */
+		reg = <0 0x40000000 0 0x80000000>;
 	};
 	reserved-memory {
 		#address-cells = <2>;
 		#size-cells = <2>;
 		ranges;
 		memory@43f00000 {
+			/* SPM/vcorefs DRAM dummy reads, also reserved by Linux. */
 			reg = <0 0x43f00000 0 0x1000>;
-			no-map;
-		};
-		memory@44600000 {
-			reg = <0 0x44600000 0 0x10000>;
 			no-map;
 		};
 	};
@@ -41,7 +39,7 @@
 	msdc_source: msdc-source-clock {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
-		clock-frequency = <400000000>;
+		clock-frequency = <384000000>;
 		bootph-all;
 	};
 	msdc_hclk: msdc-host-clock {
@@ -49,6 +47,36 @@
 		#clock-cells = <0>;
 		clock-frequency = <156000000>;
 		bootph-all;
+	};
+	msdc1_source: msdc1-source-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <192000000>;
+	};
+	usb_ref: usb-ref-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <26000000>;
+	};
+	usb_sys: usb-sys-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <124800000>;
+	};
+	usb_phy: usb-phy@11290000 {
+		compatible = "archermind,x20-96-usb2-phy";
+		reg = <0 0x11290000 0 0xc04>;
+		#phy-cells = <0>;
+	};
+	usb@11271000 {
+		compatible = "mediatek,mt6797-mtu3", "mediatek,mtu3";
+		reg = <0 0x11271000 0 0x3000>, <0 0x11280700 0 0x100>;
+		reg-names = "mac", "ippc";
+		clocks = <&usb_sys>, <&usb_ref>;
+		clock-names = "sys_ck", "ref_ck";
+		phys = <&usb_phy>;
+		dr_mode = "peripheral";
+		maximum-speed = "high-speed";
 	};
 	mmc0: mmc@11230000 {
 		compatible = "mediatek,mt6797-mmc";
@@ -61,5 +89,17 @@
 		cap-mmc-highspeed;
 		status = "okay";
 		bootph-all;
+	};
+	mmc1: mmc@11240000 {
+		compatible = "mediatek,mt6797-mmc";
+		reg = <0 0x11240000 0 0x1000>;
+		clocks = <&msdc1_source>, <&msdc_hclk>;
+		clock-names = "source", "hclk";
+		bus-width = <4>;
+		max-frequency = <13000000>;
+		cap-sd-highspeed;
+		broken-cd;
+		disable-wp;
+		status = "okay";
 	};
 };

@@ -41,8 +41,9 @@ int ssusb_check_clocks(struct ssusb_mtk *ssusb, u32 ex_clks)
 	u32 value, check_val;
 	int ret;
 
-	check_val = ex_clks | SSUSB_SYS125_RST_B_STS | SSUSB_SYSPLL_STABLE |
-			SSUSB_REF_RST_B_STS;
+	check_val = ex_clks | SSUSB_SYS125_RST_B_STS;
+	if (!ssusb->is_mt6797)
+		check_val |= SSUSB_SYSPLL_STABLE | SSUSB_REF_RST_B_STS;
 
 	ret = readl_poll_timeout(ibase + U3D_SSUSB_IP_PW_STS1, value,
 				 ((value & check_val) == check_val), 10000);
@@ -140,12 +141,12 @@ static int get_ssusb_rscs(struct udevice *dev, struct ssusb_mtk *ssusb)
 	ret = device_get_supply_regulator(dev, "vusb33-supply",
 					  &ssusb->vusb33_supply);
 	if (ret)	/* optional, ignore error */
-		dev_warn(dev, "can't get optional vusb33 %d\n", ret);
+		dev_dbg(dev, "can't get optional vusb33 %d\n", ret);
 
 	ret = device_get_supply_regulator(dev, "vbus-supply",
 					  &ssusb->vbus_supply);
 	if (ret)	/* optional, ignore error */
-		dev_warn(dev, "can't get optional vbus regulator %d!\n", ret);
+		dev_dbg(dev, "can't get optional vbus regulator %d!\n", ret);
 
 	ret = clk_get_bulk(dev, &ssusb->clks);
 	if (ret) {
@@ -177,6 +178,7 @@ static int mtu3_probe(struct udevice *dev)
 	int ret = -ENOMEM;
 
 	ssusb->dev = dev;
+	ssusb->is_mt6797 = device_is_compatible(dev, "mediatek,mt6797-mtu3");
 
 	ret = get_ssusb_rscs(dev, ssusb);
 	if (ret)

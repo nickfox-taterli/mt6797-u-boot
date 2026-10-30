@@ -310,6 +310,7 @@ struct msdc_compatible {
 	bool default_pad_dly;
 	bool use_internal_cd;
 	bool use_dma_mode;
+	bool mt6797_timing;
 };
 
 struct msdc_delay_phase {
@@ -1707,6 +1708,21 @@ static void msdc_init_hw(struct msdc_host *host)
 		       rd_dly1_reg);
 	}
 
+	if (host->dev_comp->mt6797_timing) {
+		/* MT6797 patch fields differ from the newer controller defaults.
+		 * Match its verified Linux/vendor low-speed reset profile. */
+		writel(0, &host->base->msdc_iocon);
+		writel(0, &host->base->dat_rd_dly[0]);
+		writel(0, &host->base->dat_rd_dly[1]);
+		writel(0, &host->base->dat_rd_dly[2]);
+		writel(0, &host->base->dat_rd_dly[3]);
+		writel(0x403c000f, &host->base->patch_bit0);
+		writel(0xfffe00c0, &host->base->patch_bit1);
+		writel(0x1480180f, &host->base->patch_bit2);
+		clrbits_le32(tune_reg, MSDC_PAD_TUNE_RXDLYSEL);
+		clrbits_le32(&host->base->emmc50_cfg0, BIT(9) | BIT(4) | BIT(3));
+	}
+
 	/* Configure to enable SDIO mode otherwise sdio cmd5 won't work */
 	setbits_le32(&host->base->sdc_cfg, SDC_CFG_SDIO);
 
@@ -1879,6 +1895,7 @@ static const struct dm_mmc_ops msdc_ops = {
 static const struct msdc_compatible mt6797_compat = {
 	.clk_div_bits = 12,
 	.pad_tune0 = true,
+	.mt6797_timing = true,
 	/* MT6797 uses the older synchronous FIFO/tuning path. */
 	.async_fifo = false,
 	.data_tune = false,

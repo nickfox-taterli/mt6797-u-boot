@@ -42,6 +42,7 @@ void reset_cpu(void)
 
 int print_cpuinfo(void)
 {
-	printf("CPU:   MediaTek MT6797 (X20-96)\n");
+	printf("Machine: MediaTek X20 Development Board\n");
+	printf("SoC:   MediaTek Helio X20 (MT6797)\n");
 	return 0;
 }
