@@ -7,4 +7,5 @@ Mediatek
    :maxdepth: 2
 
    mt7621
+   mt6797-x20-96
    mt8188-genio-evk

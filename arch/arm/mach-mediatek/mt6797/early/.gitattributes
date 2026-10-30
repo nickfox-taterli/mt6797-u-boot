@@ -1,0 +1,3 @@
+# Preserve the imported source bytes recorded in IMPORTS.json.
+drivers/Hal_io.c -text
+drivers/inc/x_hal_io.h -text

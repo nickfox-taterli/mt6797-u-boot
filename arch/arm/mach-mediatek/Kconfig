@@ -9,6 +9,22 @@ config SYS_VENDOR
 choice
 	prompt "MediaTek board select"
 
+config TARGET_MT6797
+	bool "MediaTek MT6797 X20-96"
+	select ARM64
+	help
+	  U-Boot proper for X20-96, entered by TF-A after the MT6797
+	  SPL or the Preloader has initialized clocks, power, DRAM and
+	  the boot device.
+
+config TARGET_MT6797_SPL
+	bool "MediaTek MT6797 X20-96 AArch32 SPL"
+	select CPU_V7A
+	select SUPPORT_SPL
+	select SPL
+	help
+	  SRAM first stage for X20-96. Build separately from AArch64 proper.
+
 config TARGET_MT7622
 	bool "MediaTek MT7622 SoC"
 	select ARM64
@@ -187,6 +203,7 @@ endif
 
 config SYS_BOARD
 	string "Board name"
+	default "x20_96" if TARGET_MT6797 || TARGET_MT6797_SPL
 	default "mt7622" if TARGET_MT7622
 	default "mt7623" if TARGET_MT7623
 	default "mt7629" if TARGET_MT7629
@@ -205,6 +222,7 @@ config SYS_BOARD
 	  be used.
 
 config SYS_CONFIG_NAME
+	default "x20_96" if TARGET_MT6797 || TARGET_MT6797_SPL
 	default "mt7623" if TARGET_MT7623
 	default "mt7629" if TARGET_MT7629
 	default "mt7981" if TARGET_MT7981
@@ -216,6 +234,7 @@ config SYS_CONFIG_NAME
 
 config MTK_BROM_HEADER_INFO
 	string
+	default "media=emmc" if TARGET_MT6797_SPL
 	default "media=nor" if TARGET_MT8518 || TARGET_MT8512 || TARGET_MT7629
 	default "media=emmc;arm64=1" if TARGET_MT8188
 	default "media=emmc" if TARGET_MT8516 || TARGET_MT8365 || TARGET_MT8366 || TARGET_MT8183 || TARGET_MT8189 || TARGET_MT8195

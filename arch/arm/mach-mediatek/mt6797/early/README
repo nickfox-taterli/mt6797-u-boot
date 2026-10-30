@@ -1,0 +1,40 @@
+MT6797 hardware initialization import
+===================================
+
+These files come from the verified X20-96 Preloader working tree under
+mainline/preloader (donor Git base fa68e7af582c3187182c6825364ceaeacaca2399).
+IMPORTS.json records each imported file's original path and content hash.
+The original notices remain in each file. Generated GPIO and EMI headers
+are frozen inputs for this board, so building SPL does not require the
+Preloader build, DCT/emigen tools, or any binary Preloader library.
+
+Only the hardware initialization subset is retained. U-Boot supplies the
+entry, C runtime, driver model, MMC command/data transport, GPT parsing,
+image loading, console and SPL framework. hardware.c provides board glue,
+read-only eFuse access and the few interface functions needed by this
+subset. The eFuse address table matches MT6797's 36 devinfo words in the
+verified Preloader; it does not call SecLib or SecPlat.
+
+Two imported files have intentional local changes:
+
+* core/inc/print.h: compile print/dbg_print calls away, including their
+  format strings and argument evaluation. DRAM training traces are not
+  present in the normal SPL binary. spl.c emits only stage results and
+  errors, and platform_assert retains the failure file and line.
+* drivers/pmic_wrap_init.c: return the final PWRAP retry result, allowing
+  SPL to report and stop on initialization failure.
+
+The DRAM algorithms and linked 140-byte EMI record are retained unchanged
+from the verified board source. Picachu calibration, security/image-auth
+libraries, USB download policy and the original Preloader main/loading
+code are not part of this build. This is the unsecured X20 development
+board profile; it does not implement image authentication for locked units.
+
+The Makefile isolates the legacy types/features from U-Boot headers and
+keeps r8 (donor ABI) and r9 (U-Boot gd) reserved. Timer and UART helper
+symbols are namespaced to avoid replacing U-Boot's implementations.
+
+Use mainline/x20-sbc/tools/build-x20-spl.sh from the workspace. The script
+checks the linked EMI bytes, SRAM/DT layout, BootROM GFH SHA, absent binary
+libraries and absent training strings. Runtime evidence and rollback are
+in docs/UBOOT-SPL-20261030.md at the workspace root.

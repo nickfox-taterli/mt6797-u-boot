@@ -1,0 +1,65 @@
+// SPDX-License-Identifier: GPL-2.0+
+/dts-v1/;
+
+/ {
+	model = "MediaTek X20-96";
+	compatible = "archermind,x20-96", "mediatek,mt6797";
+	#address-cells = <2>;
+	#size-cells = <2>;
+	aliases {
+		serial0 = &uart0;
+		mmc0 = &mmc0;
+	};
+	chosen {
+		stdout-path = "serial0:921600n8";
+	};
+	memory@40000000 {
+		device_type = "memory";
+		/* Preserve the Preloader's top-of-DRAM reservation. */
+		reg = <0 0x40000000 0 0x7ffa0000>;
+	};
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+		memory@43f00000 {
+			reg = <0 0x43f00000 0 0x1000>;
+			no-map;
+		};
+		memory@44600000 {
+			reg = <0 0x44600000 0 0x10000>;
+			no-map;
+		};
+	};
+	uart0: serial@11002000 {
+		compatible = "mediatek,mt6577-uart";
+		reg = <0 0x11002000 0 0x100>;
+		clock-frequency = <26000000>;
+		bootph-all;
+	};
+	/* Fixed rates describe the clocks configured by SPL or the Preloader. */
+	msdc_source: msdc-source-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <400000000>;
+		bootph-all;
+	};
+	msdc_hclk: msdc-host-clock {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <156000000>;
+		bootph-all;
+	};
+	mmc0: mmc@11230000 {
+		compatible = "mediatek,mt6797-mmc";
+		reg = <0 0x11230000 0 0x1000>;
+		clocks = <&msdc_source>, <&msdc_hclk>;
+		clock-names = "source", "hclk";
+		bus-width = <8>;
+		max-frequency = <25000000>;
+		non-removable;
+		cap-mmc-highspeed;
+		status = "okay";
+		bootph-all;
+	};
+};

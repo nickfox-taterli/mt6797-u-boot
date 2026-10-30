@@ -2,8 +2,12 @@
 
 obj-$(CONFIG_ARM64) += armv8-mem-map.o
 obj-y	+= cpu.o
+obj-$(CONFIG_TARGET_MT6797) += mt6797/
+obj-$(CONFIG_TARGET_MT6797_SPL) += mt6797/
 obj-$(CONFIG_MTK_TZ_MOVABLE)	+= tzcfg.o
+ifneq ($(CONFIG_TARGET_MT6797_SPL),y)
 obj-$(CONFIG_XPL_BUILD)	+= spl.o
+endif
 obj-$(CONFIG_$(PHASE_)MTK_FIRMWARE_AB) += spl_ab.o mtk_ab.o
 
 obj-$(CONFIG_TARGET_MT7622) += mt7622/

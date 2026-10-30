@@ -1087,6 +1087,7 @@ dtb-$(CONFIG_ARCH_MEDIATEK) += \
 	mt8391-genio-720-evk-ufs-edp.dtb \
 	mt8512-bm1-emmc.dtb \
 	mt8516-pumpkin.dtb \
+	mt6797-x20-96.dtb \
 	mt8518-ap1-emmc.dtb
 
 dtb-$(CONFIG_ARCH_NPCM7xx) += nuvoton-npcm750-evb.dtb

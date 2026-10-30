@@ -1,0 +1,393 @@
+{
+  "donor_base": "fa68e7af582c3187182c6825364ceaeacaca2399",
+  "files": {
+    "drivers/inc/clkbuf_ctl.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/clkbuf_ctl.h",
+      "sha256": "4562f5ef9aaf8d6c885e84982fbda097c2832f431fa7ac85ae8b3320fde330a6"
+    },
+    "drivers/inc/da9214.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/da9214.h",
+      "sha256": "33ec06f635cfc3d5481883131c83bac8ee4282d1dcfd35684ff8a778f12bf31f"
+    },
+    "drivers/inc/device_apc.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/device_apc.h",
+      "sha256": "c7b27fda2f593a15987d044ed0abe7953b7558d58922829f8935a7a25d76c67d"
+    },
+    "drivers/inc/dramc_common.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/dramc_common.h",
+      "sha256": "d0d2af8bcdeecd3f647d0dab88f9cf1340449d5eb7edfd53c280bd7ab09c5956"
+    },
+    "drivers/inc/dramc_pi_api.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/dramc_pi_api.h",
+      "sha256": "00a081b09936311dc8463c7a8053fe4103e6970873228f22ad26e249885fd4d7"
+    },
+    "drivers/inc/dramc_register.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/dramc_register.h",
+      "sha256": "797fba2fc615bc8e23fc16cf46355c3ea1354f7659cf5e03f4309f2974f5e58b"
+    },
+    "drivers/inc/emi.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/emi.h",
+      "sha256": "910f87073daff59f6ec854e29be81145f023d5bd537fee03a5fea17201072fcd"
+    },
+    "drivers/inc/emi_hw.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/emi_hw.h",
+      "sha256": "2cdd3612660c61c0df0fca837399e27e9696ba9bece337b5c5feb18f19e6e7c0"
+    },
+    "drivers/inc/fan53526.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/fan53526.h",
+      "sha256": "41eb0d594f57ef67b42435058f02dc81a8fd0bbb121ced151d97aef4a0a3f361"
+    },
+    "drivers/inc/fan53555.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/fan53555.h",
+      "sha256": "0b1b72e3cf2fb234f3d3a7771baa72cbfb37eeab9be884802700de8208cd5a2d"
+    },
+    "drivers/inc/gpio.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/gpio.h",
+      "sha256": "ab0593fd6b04cd89ad986a1f4b90105c308a29de5923cc3fa3769ea1754c11fc"
+    },
+    "drivers/inc/gpio_cfg.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/gpio_cfg.h",
+      "sha256": "0965815da52da0049d08a7761c40a2d95b7a12e9ec0f873526d6b44cf8d7c795"
+    },
+    "drivers/inc/gpio_const.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/gpio_const.h",
+      "sha256": "32d4b994e3ff8becda63d428fcbc5d6b5052093ba984a7b45ba66f8092da7212"
+    },
+    "drivers/inc/i2c.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/i2c.h",
+      "sha256": "c6084b7edb58e1ee00d846c19399434c97d40b648c3947116c5f0617d683961d"
+    },
+    "drivers/inc/mmc_core.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/mmc_core.h",
+      "sha256": "76dc7c108783fb29f649e1a9de705ec2d9c663d8552474b66a3993b25f5fad7c"
+    },
+    "drivers/inc/mmc_test.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/mmc_test.h",
+      "sha256": "db9c7e61fb55505f5cb7d0355d3ce6184247b79a64b27b049a15f951e35cad4f"
+    },
+    "drivers/inc/mmc_types.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/mmc_types.h",
+      "sha256": "3040b10a4aa9698e40286fe1afeb01a3665b7a5ee296844083545dabb76293a3"
+    },
+    "drivers/inc/msdc.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/msdc.h",
+      "sha256": "d9e79c0a798da5ee6838550a4b911efc533855e2b77077393f857e60955db45c"
+    },
+    "drivers/inc/msdc_cfg.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/msdc_cfg.h",
+      "sha256": "bff64f46634eeb39f9b801474a6e62d0517b3ac75c7ca3e70942f4f175dfbd3c"
+    },
+    "drivers/inc/msdc_dma.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/msdc_dma.h",
+      "sha256": "43edb140d6a10f409da081c7715d3369ecc5857d4fe8229976d490193de28f02"
+    },
+    "drivers/inc/msdc_io.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/msdc_io.h",
+      "sha256": "b35c74a1672625068561fdc4c0f89317a131ef8560f05b0db8b2b13617684fb5"
+    },
+    "drivers/inc/msdc_irq.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/msdc_irq.h",
+      "sha256": "4e5a4623130644f2267d4b9f0da8bce47f1be631e00f57e40f8364b83e1e3416"
+    },
+    "drivers/inc/msdc_reg.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/msdc_reg.h",
+      "sha256": "d324b0aee47a9b16044326281b493814a4740e1c5d44ca7cf17287d8789af9ad"
+    },
+    "drivers/inc/msdc_utils.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/msdc_utils.h",
+      "sha256": "f8817d0a80076cf379494c16a3dca311e760739f3d5fdbc530ae64a61996fe72"
+    },
+    "drivers/inc/mt6311.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/mt6311.h",
+      "sha256": "68f235b12d189b06b1d6713cb67b4062f1d01da212e7e87176aa0ddbc7a79548"
+    },
+    "drivers/inc/mt6797.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/mt6797.h",
+      "sha256": "ae04653416493d454378bc21e335b543ceef5889f9bedffce24ad127d87807b6"
+    },
+    "drivers/inc/mt_ptp.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/mt_ptp.h",
+      "sha256": "e759ad7e8e8640b4fd7c0fe6d46bcf86af7f3c696f2ceba92e9379f4daea14ac"
+    },
+    "drivers/inc/mt_rtc_hw.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/mt_rtc_hw.h",
+      "sha256": "ee7b0c5b7c57f26600aa3be80e57efb153537554d00bd46c935b0ef212180c4d"
+    },
+    "drivers/inc/nand_core.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/nand_core.h",
+      "sha256": "48e26d2d455e955e99e0e30a94ad03b0fb04087f58d29e45859c705f7ea20b45"
+    },
+    "drivers/inc/platform.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/platform.h",
+      "sha256": "d9b9e597754be670a330fbcf2ab0625c0c100d8212e62b0808e38f74bb200688"
+    },
+    "drivers/inc/pll.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/pll.h",
+      "sha256": "903b7fb6e40ab3c6637b05944ac5d542ec1b2bacbdfe48d292c4ef15dee68c1c"
+    },
+    "drivers/inc/pmic.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/pmic.h",
+      "sha256": "3e826235335b1c28a54d81dc2d51b50eb6a5a4d1a4cd1cd4e1ee1cce67bb0497"
+    },
+    "drivers/inc/pmic_wrap_init.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/pmic_wrap_init.h",
+      "sha256": "3f3089c9a7e161662bb044a1e2c7ac438e02f40454a574968ae6163b40d95524"
+    },
+    "drivers/inc/rtc.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/rtc.h",
+      "sha256": "2a3fd0c5c56e376acff4ada05541b62835214095371c6ba72bc927eca688ff4e"
+    },
+    "drivers/inc/spm.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/spm.h",
+      "sha256": "e8645ae30e0652d0a0f5c3c217e342e750db8d8074bb30f822b9b4b3d76f8d5b"
+    },
+    "drivers/inc/spm_mtcmos.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/spm_mtcmos.h",
+      "sha256": "d5a0b5cf24532ddac897cc44c4fdf7ac1a3b06628a2ce648d55dfe18cdfc2750"
+    },
+    "drivers/inc/spm_mtcmos_internal.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/spm_mtcmos_internal.h",
+      "sha256": "48d46495ee4a2e1c1f0ebc17e0c4d35fe8173fc5ca118b102814324d0c57bbe4"
+    },
+    "drivers/inc/sync_write.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/sync_write.h",
+      "sha256": "40ca674c53c69e88754410e90b83e6f3aa9088d3b3cdfc90ecbc29e01d9d3ea6"
+    },
+    "drivers/inc/timer.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/timer.h",
+      "sha256": "ba13274a76121c70330b3720d191cce099eea17c44ef5b9f797f3c80cebbe483"
+    },
+    "drivers/inc/uart.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/uart.h",
+      "sha256": "56d251ad122388c500116559f4daa51352351d6237e9e91ef5a59c4d924ef780"
+    },
+    "drivers/inc/upmu_hw.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/upmu_hw.h",
+      "sha256": "b8328987ccb6479013e3da509c7448c7775dc1f0ba535a12e8f1e1e4ab2b4dc7"
+    },
+    "drivers/inc/wdt.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/wdt.h",
+      "sha256": "05f8d6965861baf5f26a63d6b63faac452ac8d7f5da8fcfab7be8a0b526b38b9"
+    },
+    "drivers/inc/x_hal_io.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/inc/x_hal_io.h",
+      "sha256": "05005df4461a1e1dd76e6880f2504f4916f086d48756c9a3f3e47cd4c6c02096"
+    },
+    "core/inc/blkdev.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/blkdev.h",
+      "sha256": "3b4b57db42cbeb08f6c42b1f68b5d809ee086b0e67c15b64346be2efddccce33"
+    },
+    "core/inc/boot_device.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/boot_device.h",
+      "sha256": "1da938ccc1fe23a07d32ade991b775c5fb5f461183ad2aa9271e4222718a5697"
+    },
+    "core/inc/dram_buffer.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/dram_buffer.h",
+      "sha256": "ec7fbf59ff9ed89ebd003beeb5980145c37e8310f78a183d6aaab9c1c22f5d64"
+    },
+    "core/inc/meta.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/meta.h",
+      "sha256": "f8969705a996102124d882b8cd7c86c3b2da49e3dc9ec2b37bb815bb87fcad52"
+    },
+    "core/inc/partition.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/partition.h",
+      "sha256": "8f8ebf2f7e04618cc6f6e26df5b10074654363ce89e4a5e8fbb1e36035c4a606"
+    },
+    "core/inc/print.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/print.h",
+      "sha256": "ab15b1da7e58d473cd1f61f645fedebb7ca226a6524786deaf27a85d9dcea48c"
+    },
+    "core/inc/string.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/string.h",
+      "sha256": "a1fcaf68009fd6f254c1c2815287ad1dab28b6772fed8c95113fe6a2789db5b3"
+    },
+    "core/inc/typedefs.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/core/inc/typedefs.h",
+      "sha256": "8c1d2ed6fd24ab626ce2a697334a480377c23abe68185769afce3410455976bc"
+    },
+    "security/inc/sec_devinfo.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/inc/sec_devinfo.h",
+      "sha256": "5e88adaf7ec211c1f04812ce4757c9af38ed1584fcd65a49d450889501cafb05"
+    },
+    "security/inc/sec_limit.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/inc/sec_limit.h",
+      "sha256": "15be71588308a482293f413907afab7641186ab982a406a7267ee1429da53335"
+    },
+    "security/trustzone/inc/tz_emi_mpu.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/trustzone/inc/tz_emi_mpu.h",
+      "sha256": "65d19496ae5233666cd7bb040fe25ad97d2fca6025a02e571347ece36c4b3b00"
+    },
+    "security/trustzone/inc/tz_emi_reg.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/trustzone/inc/tz_emi_reg.h",
+      "sha256": "534794df5222d7a8937f5fac8a250a02f6642ab1682895a56e47af7336e8f324"
+    },
+    "security/trustzone/inc/tz_init.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/trustzone/inc/tz_init.h",
+      "sha256": "7a9dd626ccbb2a5eec862c12fd4e3542edbfdd0793dbfb3e7bbf390866fb2a32"
+    },
+    "security/trustzone/inc/tz_mem.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/trustzone/inc/tz_mem.h",
+      "sha256": "39a7bba786f3206b741a8152ac8b7b4e827ce968c7f3084349c2e74b10b32922"
+    },
+    "security/trustzone/inc/tz_sec_reg.h": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/trustzone/inc/tz_sec_reg.h",
+      "sha256": "6166418737023056c4d144d84ca49f2aeb23c85de8fdc61a4ec640ed2e60a7ce"
+    },
+    "custom/inc/cust_bldr.h": {
+      "source": "mainline/preloader/source/custom/x20_96/inc/cust_bldr.h",
+      "sha256": "a73cb7102a1a7ba9949771e60a370c004ccc7583638e45579cae2f2e08720e23"
+    },
+    "custom/inc/cust_msdc.h": {
+      "source": "mainline/preloader/source/custom/x20_96/inc/cust_msdc.h",
+      "sha256": "ee11950ba9e331ff315359922fe7e3585883cd4e1d4dd3b5376a6672a213c011"
+    },
+    "custom/inc/cust_nand.h": {
+      "source": "mainline/preloader/source/custom/x20_96/inc/cust_nand.h",
+      "sha256": "d465b782b49bf75abe43bc1681e00926099ef68933a58941eee3b023193ec638"
+    },
+    "custom/inc/cust_rtc.h": {
+      "source": "mainline/preloader/source/custom/x20_96/inc/cust_rtc.h",
+      "sha256": "93dde232f789a06b8ecc38b69da82b8a9760b9bade68e3161b8d8ca10e26f184"
+    },
+    "custom/inc/cust_usb.h": {
+      "source": "mainline/preloader/source/custom/x20_96/inc/cust_usb.h",
+      "sha256": "577c3c1d0277a0ce851af62750ea5ce31d965721840a17474eb2f78b42e0d006"
+    },
+    "custom/inc/memory.h": {
+      "source": "mainline/preloader/source/custom/x20_96/inc/memory.h",
+      "sha256": "a05759101d0da96ff90b145024b473bfb1eb392534a91fc79f3254a15da5fe36"
+    },
+    "generated/cust_gpio_boot.h": {
+      "source": "out/preloader-x20-96-current/inc/cust_gpio_boot.h",
+      "sha256": "5ca81b41d5d435217a7fb04841d3683418de4ddd3aefc83fbafd45912e59b09a"
+    },
+    "generated/cust_gpio_usage.h": {
+      "source": "out/preloader-x20-96-current/inc/cust_gpio_usage.h",
+      "sha256": "cfea3755f5a4e334a2efbb61470922ccee045f86c0dfd55316e388f8931b6a54"
+    },
+    "generated/cust_i2c.h": {
+      "source": "out/preloader-x20-96-current/inc/cust_i2c.h",
+      "sha256": "bce205e2dbd50bc481d635c2549373d96f355b1296aba7a504a9a962c7a8b66f"
+    },
+    "generated/custom_emi.h": {
+      "source": "out/preloader-x20-96-current/inc/custom_emi.h",
+      "sha256": "24cff7985e3bc0389ae219640444fe7cc3ad24ddcf6fbd8c09a376eb3ef06cc2"
+    },
+    "generated/preloader.h": {
+      "source": "out/preloader-x20-96-current/inc/preloader.h",
+      "sha256": "3ab0404ae352cee897294c761b2bec84a956008bc402e3604e5e6075e6c5b9a3"
+    },
+    "drivers/pll.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/pll.c",
+      "sha256": "acbc97411a0d0285ee4eb6f7c12e82a0cb7dc193830f403734548343d7a8d4bf"
+    },
+    "drivers/gpio.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/gpio.c",
+      "sha256": "3eff2a27cd5fa091c12806ecfd1a1fcf7b9bdfd5ec21ecc62cc63341e419c00f"
+    },
+    "drivers/pmic_wrap_init.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/pmic_wrap_init.c",
+      "sha256": "fe6b2ce8886a532fdcd234a1195a1d520a02d3606441605555699b09dda20877"
+    },
+    "drivers/pmic.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/pmic.c",
+      "sha256": "c8600dc6031786d3577358cf0de1c701d3adc5387d3e024ec7faf667353912f1"
+    },
+    "drivers/i2c.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/i2c.c",
+      "sha256": "d5d601c8846bd0b330256d035c86fb65cfd42e679121f820ecca2ba66467ffad"
+    },
+    "drivers/rtc.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/rtc.c",
+      "sha256": "7cd1c8d2247fcab9a6933d3628a31472b2d3a5c41e6bd153bd0016d84039e88e"
+    },
+    "drivers/emi.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/emi.c",
+      "sha256": "823e417219933ba0b0423690be2e1074dd53126863f48ad25d88df0bbc0ffbc6"
+    },
+    "drivers/dramc_pi_main.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/dramc_pi_main.c",
+      "sha256": "c413dd2fd6ac5b1f91b4b12243fc2cccbee9551720530ac154f88d2ae2a51dca"
+    },
+    "drivers/dramc_pi_basic_api.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/dramc_pi_basic_api.c",
+      "sha256": "762d6b456b71e425c1e3a5fe92a9982fbfa435d5448465e1fabf0f269fba1d55"
+    },
+    "drivers/dramc_pi_calibration_api.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/dramc_pi_calibration_api.c",
+      "sha256": "b6791a01475334169383e9244ae93ff958fda83bcff79cbc4d87b1ec56ad5e1d"
+    },
+    "drivers/Hal_io.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/Hal_io.c",
+      "sha256": "430bd81eca88a303a1727c67ca0d5e4cd61e65c7e975e1d9cc3f2ee2f6dbd96e"
+    },
+    "drivers/memory.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/memory.c",
+      "sha256": "72ee759528b8d87fc2c3e6be3633ac92caeeb828e3a52237e7b72f9c7234caca"
+    },
+    "drivers/timer.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/timer.c",
+      "sha256": "4a25d6e9bd2ae1639c25652fdb1b229012c38409cd7353e467b0633fbe3391b6"
+    },
+    "drivers/uart.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/uart.c",
+      "sha256": "10bce7d350c3e3e11cd4d765a25d3bdc581d956ad368465965714a979a80aedf"
+    },
+    "drivers/da9214.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/da9214.c",
+      "sha256": "63d4443f5308dba9a4e32d98047ed35fced34a40c1660849bbc7a704fc1eeabd"
+    },
+    "drivers/fan53555.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/fan53555.c",
+      "sha256": "dc3785459b981be119ce0ac9eb5349ead21ecf44732b502607a4a35cc443125b"
+    },
+    "drivers/fan53526.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/fan53526.c",
+      "sha256": "40ca92d6c458c6bef93037ad4da2bc477017cc7440d8314a94471167043acc73"
+    },
+    "drivers/mt_ptp.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/mt_ptp.c",
+      "sha256": "bf94a225d65f0b3a16c9d9407d472dd90587ac1b40eea97657df22c1129fd71e"
+    },
+    "drivers/spm_mtcmos.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/spm_mtcmos.c",
+      "sha256": "e6a431ced0f4dab24a5cafdabfb6b3399ba57e4675c32c81929a0de4f42c5a6a"
+    },
+    "drivers/wdt.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/wdt.c",
+      "sha256": "cb3d0941ac5970ae20a629bd76b1a7b7a3cd9e3090843a2ee94da55cc8ee6db4"
+    },
+    "drivers/clkbuf_ctl.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/clkbuf_ctl.c",
+      "sha256": "01147c7511861d3300edda5052d1db2d8e347c2ebcd140a716d27b408a68cd4a"
+    },
+    "drivers/sync_write.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/sync_write.c",
+      "sha256": "36d8d9a099367180974b4bf36e71389605c3ce55fedadac73a02949d2b6cd4ab"
+    },
+    "drivers/charging_bat.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/charging_bat.c",
+      "sha256": "a9840c2fef071fc8f11152ee0862d60b7299ca4e9dcac3742caed95f03abb8fa"
+    },
+    "drivers/device_apc.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/device_apc.c",
+      "sha256": "d6f0ca6d61eae3e98ed3da2f5d0eab656a3e6febb675e638fb5bdbe338061266"
+    },
+    "drivers/msdc_io.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/drivers/msdc_io.c",
+      "sha256": "30f0ba7ae36b5985dc85c27734993a4be1d28ac4bcffcc5b097996d4663ab434"
+    },
+    "drivers/cust_msdc.c": {
+      "source": "mainline/preloader/source/custom/x20_96/cust_msdc.c",
+      "sha256": "0fbb4392d62c92ef53036003126237936dcbc83a7f936c48940992e8adcf43c0"
+    },
+    "drivers/tz_sec_cfg.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/trustzone/tz_sec_cfg.c",
+      "sha256": "8cf392d4589c221f031606b418f0e7df1d1ec5932b972a467e6c916a26f54dce"
+    },
+    "drivers/tz_emi_mpu.c": {
+      "source": "mainline/preloader/source/platform/mt6797/src/security/trustzone/tz_emi_mpu.c",
+      "sha256": "5720eecb2760bdf9cba7081dee9b217145e3d78a41fcd16bf9e7b3185e8fd0fe"
+    }
+  }
+}
