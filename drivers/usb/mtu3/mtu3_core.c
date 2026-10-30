@@ -17,6 +17,13 @@
 
 #define MTU3_TX_FIFO_DRAIN_TIMEOUT_US	1000
 
+static bool mtu3_u3_mac_disabled(struct mtu3 *mtu)
+{
+	/* The X20 USB2 PHY leaves the USB3 MAC bank inaccessible. Keep the
+	 * U3 IP's separate FIFO layout, but do not touch its link registers. */
+	return mtu->ssusb->is_mt6797 && mtu->max_speed < USB_SPEED_SUPER;
+}
+
 static int ep_fifo_alloc(struct mtu3_ep *mep, u32 seg_size)
 {
 	struct mtu3_fifo_info *fifo = mep->fifo;
@@ -102,8 +109,14 @@ static int mtu3_device_enable(struct mtu3 *mtu)
 	mtu3_clrbits(ibase, SSUSB_U2_CTRL(0),
 		     (SSUSB_U2_PORT_DIS | SSUSB_U2_PORT_PDN |
 		      SSUSB_U2_PORT_HOST_SEL));
-	if (mtu->ssusb->is_mt6797)
+	if (mtu->ssusb->is_mt6797) {
+		/* MT6797 bit 3 gates the MAC clock in USB2 mode. The U3
+		 * register bank is still accessed by this USB2 gadget driver. */
+		if (mtu->is_u3_ip)
+			mtu3_clrbits(ibase, SSUSB_U3_CTRL(0), SSUSB_U3_PORT_U2_CG_EN);
+		mtu3_clrbits(ibase, SSUSB_U2_CTRL(0), SSUSB_U2_PORT_U2_CG_EN);
 		mtu3_setbits(ibase, U3D_SSUSB_REF_CK_CTRL, 0xf);
+	}
 
 	return ssusb_check_clocks(mtu->ssusb, check_clk);
 }
@@ -156,7 +169,8 @@ static void mtu3_intr_status_clear(struct mtu3 *mtu)
 	/* Clear U2 USB common interrupts status */
 	mtu3_writel(mbase, U3D_COMMON_USB_INTR, ~0x0);
 	/* Clear U3 LTSSM interrupts status */
-	mtu3_writel(mbase, U3D_LTSSM_INTR, ~0x0);
+	if (!mtu3_u3_mac_disabled(mtu))
+		mtu3_writel(mbase, U3D_LTSSM_INTR, ~0x0);
 	/* Clear speed change interrupt status */
 	mtu3_writel(mbase, U3D_DEV_LINK_INTR, ~0x0);
 	/* Clear QMU interrupt status */
@@ -187,7 +201,7 @@ static void mtu3_intr_enable(struct mtu3 *mtu)
 	value = SUSPEND_INTR | RESUME_INTR | RESET_INTR;
 	mtu3_writel(mbase, U3D_COMMON_USB_INTR_ENABLE, value);
 
-	if (mtu->is_u3_ip) {
+	if (mtu->is_u3_ip && !mtu3_u3_mac_disabled(mtu)) {
 		/* Enable U3 LTSSM interrupts */
 		value = HOT_RST_INTR | WARM_RST_INTR |
 			ENTER_U3_INTR | EXIT_U3_INTR;
@@ -213,12 +227,14 @@ void mtu3_set_speed(struct mtu3 *mtu, enum usb_device_speed speed)
 	switch (speed) {
 	case USB_SPEED_FULL:
 		/* disable U3 SS function */
-		mtu3_clrbits(mbase, U3D_USB3_CONFIG, USB3_EN);
+		if (!mtu3_u3_mac_disabled(mtu))
+			mtu3_clrbits(mbase, U3D_USB3_CONFIG, USB3_EN);
 		/* disable HS function */
 		mtu3_clrbits(mbase, U3D_POWER_MANAGEMENT, HS_ENABLE);
 		break;
 	case USB_SPEED_HIGH:
-		mtu3_clrbits(mbase, U3D_USB3_CONFIG, USB3_EN);
+		if (!mtu3_u3_mac_disabled(mtu))
+			mtu3_clrbits(mbase, U3D_USB3_CONFIG, USB3_EN);
 		/* HS/FS detected by HW */
 		mtu3_setbits(mbase, U3D_POWER_MANAGEMENT, HS_ENABLE);
 		break;
@@ -610,7 +626,7 @@ static void mtu3_regs_init(struct mtu3 *mtu)
 	/* be sure interrupts are disabled before registration of ISR */
 	mtu3_intr_disable(mtu);
 
-	if (mtu->is_u3_ip) {
+	if (mtu->is_u3_ip && !mtu3_u3_mac_disabled(mtu)) {
 		/* disable LGO_U1/U2 by default */
 		mtu3_clrbits(mbase, U3D_LINK_POWER_CONTROL,
 			     SW_U1_REQUEST_ENABLE | SW_U2_REQUEST_ENABLE);
